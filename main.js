@@ -19,9 +19,17 @@ app.get("/almuerzos", (req, res) => {
     res.render("index.hbs", {almuerzos})})
 
 
-app.get("nuevomenu", (req,res)=> {
-    
-})
+app.get("/update-json/:nombre/:precio", (req,res)=> {
+    fs.readFile(filePath, "utf-8", (err, data) => {
+if (err){
+    throw err;
+} else if (req.params.nombre && req.params.precios){
+    const jsonData = JSON.parse(data)
+    jsonData.almuerzos.push({
+        nombre: req.params.nombre,
+        precio: parseInt(req.params.precio),
+    });
+}
 
 
 
